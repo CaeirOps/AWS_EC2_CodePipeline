@@ -6,6 +6,7 @@ phases:
   pre_build:
     commands:
       - echo enable amazon-linux-extras
+      - yum install amazon-linux-extras -y
       - amazon-linux-extras enable nginx1
       - yum clean metadata
   build:
