@@ -5,11 +5,14 @@ run-as: root
 phases:
   pre_build:
     commands:
-      - echo install nginx
-      - yum install nginx -y && systemctl enable nginx && systemctl start nginx
-      - curl -I http://localhost
-      - if [ $(echo $?) -eq 0 ] ; then echo OK; fi
+      - echo enable amazon-linux-extras
+      - amazon-linux-extras enable nginx1
+      - yum clean metadata
   build:
     commands:
+      - echo install nginx
+      - yum install nginx -y && systemctl enable nginx && systemctl start nginx
       - echo update site
+      - curl -I http://localhost
+      - if [ $(echo $?) -eq 0 ] ; then echo OK; fi
       - cp index.html > /var/wwww/html/
